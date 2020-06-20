@@ -1,11 +1,13 @@
-编译构建分离
-==========
+单一的源代码目录
+=============
 
-mkdir bin
-mkdir -p lib/utils
+参考redis源码，src目录中均是*.c文件，不再分离单独的目录，编译后的*.o也放在相同目录中
 
-在主目录下运行命令
+Makefile也进行调整
 
-gcc -o ./lib/circle.o -c ./src/circle.c
-gcc -o ./lib/utils/circulararea.o -c ./src/utils/circulararea.c
-gcc -o ./bin/circle ./lib/circle.o ./lib/utils/circulararea.o -lm
+OBJS = $(patsubst %.c, %.o, $(wildcard *.c))
+
+patsubst和wildcard
+==================
+
+https://zhuanlan.zhihu.com/p/149346441
